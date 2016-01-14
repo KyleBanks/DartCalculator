@@ -12,7 +12,7 @@ double number1;
 
 //HTML Elements
 DivElement screen;
-List<DivElement> numbers;
+ElementList<DivElement> numbers;
 DivElement decimal;
 DivElement clear;
 DivElement clearAll;
@@ -25,33 +25,33 @@ DivElement equals;
 //1: Initialize Elements
 //2: Implement click listeners
 void main() {
-    screen = query("#calculator_screen");
+    screen = querySelector("#calculator_screen");
     
-    numbers = queryAll(".number");
+    numbers = querySelectorAll(".number");
     for(DivElement number in numbers) {
       number.onClick.listen(numberClicked); 
     }
-    decimal = query("#decimal");
+    decimal = querySelector("#decimal");
     decimal.onClick.listen(decimalClicked);
     
-    clear = query("#clear");
+    clear = querySelector("#clear");
     clear.onClick.listen(clearScreen);
-    clearAll = query("#clear-everything");
+    clearAll = querySelector("#clear-everything");
     clearAll.onClick.listen(clearEverything);
     
     
     //4 (a): Add elements and stub out click listeners for operation type
-    add = query("#add");
+    add = querySelector("#add");
     add.onClick.listen(addClicked);
-    subtract = query("#subtract");
+    subtract = querySelector("#subtract");
     subtract.onClick.listen(subtractClicked);
-    multiply = query("#multiply");
+    multiply = querySelector("#multiply");
     multiply.onClick.listen(multiplyClicked);
-    divide = query("#divide");
+    divide = querySelector("#divide");
     divide.onClick.listen(divideClicked);
     
     //8: Add equals button and stub out method
-    equals = query("#equals");
+    equals = querySelector("#equals");
     equals.onClick.listen(equalsClicked);
   
     clearEverything(null);
@@ -70,7 +70,7 @@ void numberClicked(MouseEvent event)  {
     //Add the number clicked to the screen, if the screen number's length is less than 10
     if(screen.text.length < 10) {
         //print(event.toElement.text + " clicked");
-        screen.text = screen.text + event.toElement.text;
+        screen.text = screen.text + event.target.text;
     }
 }
 
@@ -104,19 +104,19 @@ void clearEverything(MouseEvent event) {
 //5: Implement click events for operation types
 void addClicked(MouseEvent event) {
     operationType = OperationTypeAdd;
-    operationTypeChanged(event.toElement);
+    operationTypeChanged(event.target);
 }
 void subtractClicked(MouseEvent event) {
     operationType = OperationTypeSubtract;
-    operationTypeChanged(event.toElement);
+    operationTypeChanged(event.target);
 }
 void multiplyClicked(MouseEvent event) {
     operationType = OperationTypeMultiply;
-    operationTypeChanged(event.toElement);
+    operationTypeChanged(event.target);
 }
 void divideClicked(MouseEvent event) {
     operationType = OperationTypeDivide;
-    operationTypeChanged(event.toElement);
+    operationTypeChanged(event.target);
 }
 //6: Add global click event for all operations
 void operationTypeChanged(Element selected) {
